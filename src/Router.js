@@ -1,6 +1,7 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import Main from "./screens/Main";
+import Registered from "./screens/Registered";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 
@@ -16,6 +17,14 @@ const StackNavigator = createStackNavigator(
     },
     SignUp: {
       screen: SignUp,
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: "",
+        };
+      },
+    },
+    Registered: {
+      screen: Registered,
       navigationOptions: ({ navigation }) => {
         return {
           title: "",
