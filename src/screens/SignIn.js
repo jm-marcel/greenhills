@@ -20,7 +20,9 @@ export default function SignIn({ navigation }) {
     setAdministratorOn((previousState) => !previousState);
 
   const login = () => {
-    navigation.navigate("Main");
+    administratorOn
+      ? navigation.navigate("AdminHome")
+      : navigation.navigate("UserHome");
   };
 
   return (

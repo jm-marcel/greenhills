@@ -1,9 +1,11 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import AdminHome from "./screens/AdminHome";
 import Main from "./screens/Main";
 import Registered from "./screens/Registered";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
+import UserHome from "./screens/UserHome";
 
 const StackNavigator = createStackNavigator(
   {
@@ -33,6 +35,22 @@ const StackNavigator = createStackNavigator(
     },
     SignIn: {
       screen: SignIn,
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: "",
+        };
+      },
+    },
+    UserHome: {
+      screen: UserHome,
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: "",
+        };
+      },
+    },
+    AdminHome: {
+      screen: AdminHome,
       navigationOptions: ({ navigation }) => {
         return {
           title: "",

@@ -51,8 +51,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 2,
     alignItems: "flex-start",
-    justifyContent: "center",
-    paddingBottom: 50,
+    justifyContent: "flex-start",
   },
   body: {
     flex: 2,
