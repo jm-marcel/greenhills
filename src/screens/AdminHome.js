@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Card from "../components/Card";
 
 export default function AdminHome({ navigation }) {
   const exit = () => {
@@ -32,74 +33,23 @@ export default function AdminHome({ navigation }) {
       </View>
       <View style={styles.body}>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.card}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                paddingTop: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Perfil</Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                Visualize e edite
-              </Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                seus dados!
-              </Text>
-            </View>
-            <Image
-              style={styles.image}
-              source={require("../../assets/profile.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                paddingTop: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Áreas</Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                Visualize, edite ou
-              </Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                bloqueie áreas!
-              </Text>
-            </View>
-            <Image
-              style={styles.image}
-              source={require("../../assets/edit.png")}
-            />
-          </TouchableOpacity>
+          <Card
+            title="Perfil"
+            subtitle={`Visualize e edite\nseus dados!`}
+            image={require("../../assets/profile.png")}
+          />
+          <Card
+            title="Áreas"
+            subtitle={`Visualize, edite ou\nbloqueie áreas!`}
+            image={require("../../assets/edit.png")}
+          />
         </View>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.card}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                paddingTop: 15,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Reservas</Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                Visualize, edite ou
-              </Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                remova reservas!
-              </Text>
-            </View>
-            <Image
-              style={styles.image}
-              source={require("../../assets/schedules.png")}
-            />
-          </TouchableOpacity>
+          <Card
+            title="Reservas"
+            subtitle={`Visualize, edite ou\nremova reservas!`}
+            image={require("../../assets/schedules.png")}
+          />
           <View
             style={{
               height: "85%",
@@ -161,19 +111,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-  },
-  card: {
-    height: "85%",
-    width: "40%",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    backgroundColor: "#fff",
-    borderRadius: 7,
-  },
-  image: {
-    maxHeight: 170,
-    maxWidth: 135,
   },
   bells: {
     maxHeight: 150,

@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Card from "../components/Card";
 
 export default function UserHome({ navigation }) {
   const exit = () => {
@@ -32,72 +33,23 @@ export default function UserHome({ navigation }) {
       </View>
       <View style={styles.body}>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.card}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                paddingTop: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Perfil</Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                Visualize e edite
-              </Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                seus dados!
-              </Text>
-            </View>
-            <Image
-              style={styles.image}
-              source={require("../../assets/profile.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.card}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                paddingTop: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Minhas Reservas</Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                Visualize, edite ou
-              </Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                remova reservas!
-              </Text>
-            </View>
-            <Image
-              style={styles.image}
-              source={require("../../assets/scheduled.png")}
-            />
-          </TouchableOpacity>
+          <Card
+            title="Perfil"
+            subtitle={`Visualize e edite\nseus dados!`}
+            image={require("../../assets/profile.png")}
+          />
+          <Card
+            title="Minhas Reservas"
+            subtitle={`Visualize, edite ou\nremova reservas!`}
+            image={require("../../assets/scheduled.png")}
+          />
         </View>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.card}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-                paddingTop: 15,
-                paddingLeft: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Reservar Área</Text>
-              <Text style={{ color: "rgba(25, 29, 33, 0.5)" }}>
-                Reserve uma nova área!
-              </Text>
-            </View>
-            <Image
-              style={styles.image}
-              source={require("../../assets/schedule.png")}
-            />
-          </TouchableOpacity>
+          <Card
+            title="Reservar Área"
+            subtitle={`Reserve uma nova\nárea`}
+            image={require("../../assets/schedule.png")}
+          />
           <View
             style={{
               height: "85%",
@@ -159,19 +111,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-  },
-  card: {
-    height: "85%",
-    width: "40%",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    backgroundColor: "#fff",
-    borderRadius: 7,
-  },
-  image: {
-    maxHeight: 170,
-    maxWidth: 135,
   },
   bells: {
     maxHeight: 150,
