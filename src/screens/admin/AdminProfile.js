@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import {
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
+    Image,
+    Modal,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInputMask } from "react-native-masked-text";
 
-export default function Profile({ navigation }) {
+export default function AdminProfile({ navigation }) {
   const [date, setDate] = useState("");
   const [phone, setPhone] = useState("");
   const [modal, setModal] = useState(false);
+
+  const confirm = () => {
+    setModal(!modal);
+    navigation.navigate("AdminHome");
+  };
 
   return (
     <View style={styles.container}>
@@ -34,7 +39,7 @@ export default function Profile({ navigation }) {
         <View style={styles.body}>
           <View style={styles.firstRow}>
             <Image
-              source={require("../../assets/data.png")}
+              source={require("../../../assets/data.png")}
               style={styles.image}
             />
           </View>
@@ -96,7 +101,10 @@ export default function Profile({ navigation }) {
           </View>
         </View>
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.registeredButton}>
+          <TouchableOpacity
+            style={styles.registeredButton}
+            onPress={() => setModal(!modal)}
+          >
             <Text
               style={{
                 color: "#fff",
@@ -110,7 +118,7 @@ export default function Profile({ navigation }) {
           </TouchableOpacity>
         </View>
         <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={modal}
           onRequestClose={() => {
@@ -119,13 +127,30 @@ export default function Profile({ navigation }) {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => setModal(!modal)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </TouchableOpacity>
+              <View>
+                <Text style={styles.upperText}>Confirmar Atualização</Text>
+                <Text style={styles.modalText}>
+                  Ei! Você tem certeza de que quer atualizar seus dados?
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <View style={{ paddingRight: 10 }}>
+                  <TouchableOpacity
+                    style={styles.confirmButton}
+                    onPress={confirm}
+                  >
+                    <Text style={styles.confirmTextStyle}>Sim!</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{ paddingLeft: 10 }}>
+                  <TouchableOpacity
+                    style={styles.denyButton}
+                    onPress={() => setModal(!modal)}
+                  >
+                    <Text style={styles.denyTextStyle}>Não!</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </View>
         </Modal>
@@ -221,13 +246,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: -1,
+    backgroundColor: "#rgba(0, 0, 0, 0.8)",
   },
   modalView: {
-    margin: 20,
+    margin: 25,
     backgroundColor: "#fff",
-    borderRadius: 15,
+    borderRadius: 10,
     padding: 35,
-    alignItems: "center",
+    alignItems: "flex-start",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -237,18 +269,43 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+  confirmButton: {
+    borderRadius: 2,
+    borderColor: "#fff",
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 20,
+    paddingLeft: 20,
     backgroundColor: "#000",
   },
+  denyButton: {
+    borderRadius: 2,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 20,
+    paddingLeft: 20,
+    backgroundColor: "#fff",
+  },
+  upperText: {
+    fontSize: 10,
+    color: "#656F77",
+    paddingBottom: 10,
+  },
   modalText: {
-    marginBottom: 15,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    marginBottom: 20,
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "left",
+  },
+  confirmTextStyle: {
+    color: "#fff",
+    fontWeight: "bold",
     textAlign: "center",
   },
-  textStyle: {
-    color: "#fff",
+  denyTextStyle: {
+    color: "#000",
     fontWeight: "bold",
     textAlign: "center",
   },

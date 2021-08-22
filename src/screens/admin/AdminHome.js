@@ -37,7 +37,7 @@ export default function AdminHome({ navigation }) {
             title="Perfil"
             subtitle={`Visualize e edite\nseus dados!`}
             image={require("../../../assets/profile.png")}
-            screen="Profile"
+            screen="AdminProfile"
           />
           <Card
             title="Áreas"

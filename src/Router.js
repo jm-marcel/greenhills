@@ -1,13 +1,14 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import UserProfile from "./screens//user/UserProfile";
 import AdminHome from "./screens/admin/AdminHome";
+import AdminProfile from "./screens/admin/AdminProfile";
 import Areas from "./screens/admin/Areas";
 import Schedules from "./screens/admin/Schedules";
 import Registered from "./screens/auth/Registered";
 import SignIn from "./screens/auth/SignIn";
 import SignUp from "./screens/auth/SignUp";
 import Main from "./screens/Main";
-import Profile from "./screens/Profile";
 import Schedule from "./screens/user/Schedule";
 import Scheduled from "./screens/user/Scheduled";
 import UserHome from "./screens/user/UserHome";
@@ -62,8 +63,16 @@ const StackNavigator = createStackNavigator(
         };
       },
     },
-    Profile: {
-      screen: Profile,
+    UserProfile: {
+      screen: UserProfile,
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: "",
+        };
+      },
+    },
+    AdminProfile: {
+      screen: AdminProfile,
       navigationOptions: ({ navigation }) => {
         return {
           title: "",
