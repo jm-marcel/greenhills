@@ -4,7 +4,7 @@ import { withNavigation } from "react-navigation";
 
 class Area extends React.Component {
   render() {
-    return (
+    return this.props.edit === true ? (
       <View style={styles.area}>
         <View style={styles.image}>
           <Image style={styles.png} source={this.props.image} />
@@ -30,13 +30,39 @@ class Area extends React.Component {
             <TouchableOpacity>
               <Image
                 style={{ maxHeight: 30, maxWidth: 30 }}
-                source={require("../../assets/pencil.png")}
+                source={require("../../assets/dumpster.png")}
               />
             </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    ) : (
+      <View style={styles.area}>
+        <View style={styles.image}>
+          <Image style={styles.png} source={this.props.image} />
+        </View>
+        <View style={styles.info}>
+          <View style={styles.infoHeader}>
+            <Text style={{ color: "#656F77", paddingBottom: 10 }}>
+              {this.props.subtitle}
+            </Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+              {this.props.title}
+            </Text>
+          </View>
+          <View style={styles.infoBody}>
+            <Text>{this.props.info}</Text>
+          </View>
+          <View style={styles.infoFooter}>
+            <Image
+              style={{ maxHeight: 30, maxWidth: 30 }}
+              source={require("../../assets/admin.png")}
+            />
+            <Text>{this.props.admin}</Text>
             <TouchableOpacity>
               <Image
                 style={{ maxHeight: 30, maxWidth: 30 }}
-                source={require("../../assets/dumpster.png")}
+                source={require("../../assets/add.png")}
               />
             </TouchableOpacity>
           </View>

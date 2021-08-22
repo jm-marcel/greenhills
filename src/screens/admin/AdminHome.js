@@ -35,13 +35,13 @@ export default function AdminHome({ navigation }) {
         <View style={styles.row}>
           <Card
             title="Perfil"
-            subtitle={`Visualize e edite\nseus dados!`}
+            subtitle={`Visualize ou edite\nsuas informações!`}
             image={require("../../../assets/profile.png")}
             screen="AdminProfile"
           />
           <Card
             title="Áreas"
-            subtitle={`Visualize, edite ou\nbloqueie áreas!`}
+            subtitle={`Visualize ou remova\náreas!`}
             image={require("../../../assets/edit.png")}
             screen="Areas"
           />
@@ -49,7 +49,7 @@ export default function AdminHome({ navigation }) {
         <View style={styles.row}>
           <Card
             title="Reservas"
-            subtitle={`Visualize, edite ou\nremova reservas!`}
+            subtitle={`Visualize ou remova\nreservas feitas!`}
             image={require("../../../assets/schedules.png")}
             screen="Schedules"
           />

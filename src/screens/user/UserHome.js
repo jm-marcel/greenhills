@@ -35,7 +35,7 @@ export default function UserHome({ navigation }) {
         <View style={styles.row}>
           <Card
             title="Perfil"
-            subtitle={`Visualize e edite\nseus dados!`}
+            subtitle={`Visualize ou edite\nsuas informações!`}
             image={require("../../../assets/profile.png")}
             screen="UserProfile"
           />
