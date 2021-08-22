@@ -34,7 +34,7 @@ export default function SignUp({ navigation }) {
         <View style={styles.body}>
           <View style={styles.firstRow}>
             <Image
-              source={require("../../assets/register.png")}
+              source={require("../../../assets/register.png")}
               style={styles.image}
             />
           </View>

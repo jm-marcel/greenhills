@@ -1,16 +1,16 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import AdminHome from "./screens/AdminHome";
-import Areas from "./screens/Areas";
+import AdminHome from "./screens/admin/AdminHome";
+import Areas from "./screens/admin/Areas";
+import Schedules from "./screens/admin/Schedules";
+import Registered from "./screens/auth/Registered";
+import SignIn from "./screens/auth/SignIn";
+import SignUp from "./screens/auth/SignUp";
 import Main from "./screens/Main";
 import Profile from "./screens/Profile";
-import Registered from "./screens/Registered";
-import Schedule from "./screens/Schedule";
-import Scheduled from "./screens/Scheduled";
-import Schedules from "./screens/Schedules";
-import SignIn from "./screens/SignIn";
-import SignUp from "./screens/SignUp";
-import UserHome from "./screens/UserHome";
+import Schedule from "./screens/user/Schedule";
+import Scheduled from "./screens/user/Scheduled";
+import UserHome from "./screens/user/UserHome";
 
 const StackNavigator = createStackNavigator(
   {

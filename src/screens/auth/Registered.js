@@ -16,7 +16,7 @@ export default function Registered({ navigation }) {
       </View>
       <View style={styles.body}>
         <Image
-          source={require("../../assets/registered.png")}
+          source={require("../../../assets/registered.png")}
           style={styles.image}
         />
       </View>

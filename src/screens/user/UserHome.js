@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Card from "../components/Card";
+import Card from "../../components/Card";
 
-export default function AdminHome({ navigation }) {
+export default function UserHome({ navigation }) {
   const exit = () => {
     navigation.navigate("Main");
   };
@@ -21,7 +21,7 @@ export default function AdminHome({ navigation }) {
           <TouchableOpacity style={styles.backdoor} onPress={exit}>
             <Image
               style={styles.backdoor}
-              source={require("../../assets/door.png")}
+              source={require("../../../assets/door.png")}
             />
           </TouchableOpacity>
         </View>
@@ -36,22 +36,22 @@ export default function AdminHome({ navigation }) {
           <Card
             title="Perfil"
             subtitle={`Visualize e edite\nseus dados!`}
-            image={require("../../assets/profile.png")}
+            image={require("../../../assets/profile.png")}
             screen="Profile"
           />
           <Card
-            title="Áreas"
-            subtitle={`Visualize, edite ou\nbloqueie áreas!`}
-            image={require("../../assets/edit.png")}
-            screen="Areas"
+            title="Minhas Reservas"
+            subtitle={`Visualize, edite ou\nremova reservas!`}
+            image={require("../../../assets/scheduled.png")}
+            screen="Scheduled"
           />
         </View>
         <View style={styles.row}>
           <Card
-            title="Reservas"
-            subtitle={`Visualize, edite ou\nremova reservas!`}
-            image={require("../../assets/schedules.png")}
-            screen="Schedules"
+            title="Reservar Área"
+            subtitle={`Reserve uma nova\nárea`}
+            image={require("../../../assets/schedule.png")}
+            screen="Schedule"
           />
           <View
             style={{
@@ -65,7 +65,7 @@ export default function AdminHome({ navigation }) {
           >
             <Image
               style={styles.bells}
-              source={require("../../assets/bells.png")}
+              source={require("../../../assets/bells.png")}
             />
           </View>
         </View>

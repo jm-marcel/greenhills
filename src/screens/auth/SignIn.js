@@ -14,7 +14,7 @@ export default function SignIn({ navigation }) {
   const [administratorOn, setAdministratorOn] = useState(false);
   const [safePassword, setSafePassword] = useState(true);
   const [password, setPassword] = useState("");
-  const [eye, setEye] = useState(require("../../assets/eye.png"));
+  const [eye, setEye] = useState(require("../../../assets/eye.png"));
 
   const toggleSwitch = () =>
     setAdministratorOn((previousState) => !previousState);
@@ -42,7 +42,7 @@ export default function SignIn({ navigation }) {
         </View>
         <View style={styles.body}>
           <Image
-            source={require("../../assets/login.png")}
+            source={require("../../../assets/login.png")}
             style={styles.image}
           />
           <View style={styles.row}>
@@ -67,9 +67,9 @@ export default function SignIn({ navigation }) {
               style={styles.eyeArea}
               onPress={() => {
                 safePassword ? setSafePassword(false) : setSafePassword(true);
-                eye == require("../../assets/eye.png")
-                  ? setEye(require("../../assets/closed-eye.png"))
-                  : setEye(require("../../assets/eye.png"));
+                eye == require("../../../assets/eye.png")
+                  ? setEye(require("../../../assets/closed-eye.png"))
+                  : setEye(require("../../../assets/eye.png"));
               }}
             >
               <Image resizeMode="contain" style={styles.eye} source={eye} />
