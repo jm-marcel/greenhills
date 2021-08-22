@@ -1,10 +1,16 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { withNavigation } from "react-navigation";
 
-export default class Card extends React.Component {
+class Card extends React.Component {
   render() {
     return (
-      <TouchableOpacity style={styles.card}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => {
+          this.props.navigation.navigate(this.props.screen);
+        }}
+      >
         <View
           style={{
             flex: 1,
@@ -37,3 +43,5 @@ const styles = StyleSheet.create({
     maxWidth: 135,
   },
 });
+
+export default withNavigation(Card);

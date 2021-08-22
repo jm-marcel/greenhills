@@ -37,11 +37,13 @@ export default function UserHome({ navigation }) {
             title="Perfil"
             subtitle={`Visualize e edite\nseus dados!`}
             image={require("../../assets/profile.png")}
+            screen="Profile"
           />
           <Card
             title="Minhas Reservas"
             subtitle={`Visualize, edite ou\nremova reservas!`}
             image={require("../../assets/scheduled.png")}
+            screen="Scheduled"
           />
         </View>
         <View style={styles.row}>
@@ -49,6 +51,7 @@ export default function UserHome({ navigation }) {
             title="Reservar Área"
             subtitle={`Reserve uma nova\nárea`}
             image={require("../../assets/schedule.png")}
+            screen="Schedule"
           />
           <View
             style={{
