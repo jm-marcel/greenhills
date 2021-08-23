@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
   Image,
@@ -5,17 +6,36 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInputMask } from "react-native-masked-text";
+import firebase from "../../config/Firebase";
 
 export default function SignUp({ navigation }) {
-  const [date, setDate] = useState("");
+  const database = firebase.firestore();
+
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const registered = () => {
-    navigation.navigate("Registered");
+    if (name === "" || phone === "" || email === "" || password === "") {
+      setError(true);
+    } else {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((data) => {
+          let user = data.user;
+        })
+        .catch((error) => {
+          setError(true);
+        });
+      navigation.navigate("Registered");
+    }
   };
 
   return (
@@ -38,6 +58,20 @@ export default function SignUp({ navigation }) {
               style={styles.image}
             />
           </View>
+          {error === true ? (
+            <View style={styles.alertRow}>
+              <View style={styles.contentAlert}>
+                <MaterialCommunityIcons
+                  name="alert-circle"
+                  size={20}
+                  color="#e33c28"
+                />
+                <Text style={styles.alert}>Ei! Revise seus dados!</Text>
+              </View>
+            </View>
+          ) : (
+            <View />
+          )}
           <View style={styles.secondRow}>
             <View>
               <Text style={styles.text}>Nome</Text>
@@ -45,33 +79,9 @@ export default function SignUp({ navigation }) {
                 style={styles.input}
                 placeholder="Nome"
                 autoCompleteType="name"
-                placeholderTextColor={"rgba(25, 29, 33, 0.5)"}
-              />
-            </View>
-            <View>
-              <Text style={styles.text}>Data de Nascimento</Text>
-              <TextInputMask
-                style={styles.input}
-                placeholder={"DD/MM/AAAA"}
-                placeholderTextColor={"rgba(25, 29, 33, 0.5)"}
-                type={"datetime"}
-                options={{
-                  format: "DD/MM/YYYY",
-                }}
-                value={date}
-                onChangeText={(date) => {
-                  setDate(date);
-                }}
-              />
-            </View>
-          </View>
-          <View style={styles.thirdRow}>
-            <View>
-              <Text style={styles.text}>E-Mail</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="exemplo@exemplo.com"
-                autoCompleteType="email"
+                type="text"
+                onChangeText={(name) => setName(name)}
+                value={name}
                 placeholderTextColor={"rgba(25, 29, 33, 0.5)"}
               />
             </View>
@@ -91,6 +101,32 @@ export default function SignUp({ navigation }) {
                 onChangeText={(phone) => {
                   setPhone(phone);
                 }}
+              />
+            </View>
+          </View>
+          <View style={styles.thirdRow}>
+            <View>
+              <Text style={styles.text}>E-Mail</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="exemplo@exemplo.com"
+                autoCompleteType="email"
+                type="text"
+                onChangeText={(email) => setEmail(email)}
+                value={email}
+                placeholderTextColor={"rgba(25, 29, 33, 0.5)"}
+              />
+            </View>
+            <View>
+              <Text style={styles.text}>Senha</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Escolha bem, hein! ;)"
+                autoCompleteType="password"
+                type="text"
+                onChangeText={(password) => setPassword(password)}
+                value={password}
+                placeholderTextColor={"rgba(25, 29, 33, 0.5)"}
               />
             </View>
           </View>
@@ -157,6 +193,23 @@ const styles = StyleSheet.create({
   image: {
     maxHeight: 300,
     maxWidth: 350,
+  },
+  contentAlert: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    marginLeft: 85,
+  },
+  alert: {
+    paddingLeft: 10,
+    color: "#e33c28",
+  },
+  alertRow: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   firstRow: {
     flexDirection: "row",

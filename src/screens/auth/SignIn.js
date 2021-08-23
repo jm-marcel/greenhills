@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -9,21 +10,37 @@ import {
   View
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import firebase from "../../config/Firebase";
 
 export default function SignIn({ navigation }) {
-  const [administratorOn, setAdministratorOn] = useState(false);
-  const [safePassword, setSafePassword] = useState(true);
+  const database = firebase.firestore();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [safePassword, setSafePassword] = useState(true);
+  const [administratorOn, setAdministratorOn] = useState(false);
+  const [error, setError] = useState(false);
   const [eye, setEye] = useState(require("../../../assets/eye.png"));
 
   const toggleSwitch = () =>
     setAdministratorOn((previousState) => !previousState);
 
   const login = () => {
-    administratorOn
-      ? navigation.navigate("AdminHome")
-      : navigation.navigate("UserHome");
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((data) => {
+        let user = data.user;
+        administratorOn
+          ? navigation.navigate("AdminHome", { userId: user.uid })
+          : navigation.navigate("UserHome", { userId: user.uid });
+      })
+      .catch((error) => {
+        setError(true);
+      });
   };
+
+  useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>
@@ -45,12 +62,30 @@ export default function SignIn({ navigation }) {
             source={require("../../../assets/login.png")}
             style={styles.image}
           />
+          {error === true ? (
+            <View style={styles.alertRow}>
+              <View style={styles.contentAlert}>
+                <MaterialCommunityIcons
+                  name="alert-circle"
+                  size={20}
+                  color="#e33c28"
+                />
+                <Text style={styles.alert}>
+                  Hmmm... Algo de errado não está certo! :/
+                </Text>
+              </View>
+            </View>
+          ) : (
+            <View />
+          )}
           <View style={styles.row}>
             <TextInput
               style={styles.emailInput}
               placeholder="exemplo@exemplo.com"
-              autoCompleteType="email"
+              type="text"
               placeholderTextColor={"rgba(25, 29, 33, 0.5)"}
+              onChangeText={(email) => setEmail(email)}
+              value={email}
             />
           </View>
           <View style={styles.row}>
@@ -142,6 +177,21 @@ const styles = StyleSheet.create({
   image: {
     maxHeight: 300,
     maxWidth: 350,
+  },
+  contentAlert: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  alert: {
+    paddingLeft: 10,
+    color: "#e33c28",
+  },
+  alertRow: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   row: {
     flex: 1,
