@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
+  Switch,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInputMask } from "react-native-masked-text";
@@ -19,6 +20,7 @@ export default function SignUp({ navigation }) {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [administratorOn, setAdministratorOn] = useState(false);
   const [error, setError] = useState(false);
 
   const registered = () => {
@@ -30,13 +32,23 @@ export default function SignUp({ navigation }) {
         .createUserWithEmailAndPassword(email, password)
         .then((data) => {
           let user = data.user;
+          navigation.navigate("Registered", { userId: user.uid });
         })
         .catch((error) => {
           setError(true);
         });
-      navigation.navigate("Registered");
+      database.collection("User").doc(name).set({
+        name: name,
+        phone: phone,
+        admin: administratorOn,
+        email: email,
+        password: password,
+      });
     }
   };
+
+  const toggleSwitch = () =>
+    setAdministratorOn((previousState) => !previousState);
 
   return (
     <View style={styles.container}>
@@ -132,6 +144,15 @@ export default function SignUp({ navigation }) {
           </View>
         </View>
         <View style={styles.footer}>
+          <Text style={styles.adminText}>Administrador</Text>
+          <Switch
+            trackColor={{ true: "#000000", false: "#fff" }}
+            thumbColor={administratorOn ? "#fff" : "#000000"}
+            onValueChange={toggleSwitch}
+            value={administratorOn}
+          />
+        </View>
+        <View style={styles.button}>
           <TouchableOpacity
             onPress={registered}
             style={styles.registeredButton}
@@ -177,9 +198,18 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
-    alignItems: "flex-start",
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: 40,
+    paddingTop: 20,
+    paddingLeft: 110,
+  },
+  button: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: 20,
     paddingLeft: 130,
   },
   title: {
@@ -220,7 +250,6 @@ const styles = StyleSheet.create({
     flex: 2,
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10,
   },
   thirdRow: {
     flex: 2,
@@ -240,6 +269,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 15,
     paddingLeft: 5,
+    paddingRight: 5,
+  },
+  adminText: {
+    color: "#fff",
+    fontSize: 15,
+    marginBottom: 5,
+    paddingRight: 10,
   },
   registeredButton: {
     paddingTop: 10,

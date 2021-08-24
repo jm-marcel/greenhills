@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -39,8 +39,6 @@ export default function SignIn({ navigation }) {
         setError(true);
       });
   };
-
-  useEffect(() => {}, []);
 
   return (
     <View style={styles.container}>

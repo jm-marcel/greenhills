@@ -9,10 +9,8 @@ export default function Registered({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Cadastro em Análise</Text>
-        <Text style={styles.subtitle}>
-          Entraremos em contato contigo em breve!
-        </Text>
+        <Text style={styles.title}>Cadastro Realizado!</Text>
+        <Text style={styles.subtitle}>Você já pode acessar nosso sistema!</Text>
       </View>
       <View style={styles.body}>
         <Image
@@ -30,7 +28,7 @@ export default function Registered({ navigation }) {
               paddingRight: 25,
             }}
           >
-            Ok!
+            Legal!
           </Text>
         </TouchableOpacity>
       </View>

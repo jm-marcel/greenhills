@@ -1,10 +1,17 @@
+import firebase from "firebase";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Card from "../../components/Card";
 
-export default function AdminHome({ navigation }) {
+export default function AdminHome({ navigation, route }) {
   const exit = () => {
-    navigation.navigate("Main");
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigation.navigate("Main");
+      })
+      .catch((error) => {});
   };
 
   return (
