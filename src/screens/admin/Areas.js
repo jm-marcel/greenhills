@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
+  FlatList,
   Modal,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -11,6 +11,56 @@ import Area from "../../components/Area";
 
 export default function Areas({ navigation }) {
   const [modal, setModal] = useState(false);
+  const areaData = [
+    {
+      title: "Piscina Olímpica",
+      subtitle: "Esporte",
+      info: `Comprimento: 50 metros\n\nLargura: 25 metros\n\nProfundidade: 3 metros\n\nTemperatura da água: 25°C\n\nNúmero de raias: 8`,
+      admin: "Administrador",
+      edit: true,
+      image: require("../../../assets/pool.png"),
+    },
+    {
+      title: "Churrasqueira",
+      subtitle: "Lazer",
+      info: `Peso: 2,8kg\n\nAltura: 60 cm\n\nLargura: 30 cm\n\nProfundidade: 38 cm\n\nFabricante: ouro de minas`,
+      admin: "Administrador",
+      edit: true,
+      image: require("../../../assets/barbecue.png"),
+    },
+    {
+      title: "Refeitório",
+      subtitle: "Alimentação",
+      info: `Capacidade: 250 pessoas\n\nTemperatura: 20°C\n\nEspaço: 596,96m2\n\nBanheiros: Masculinx e Femininx\n\nCozinha: Restrita`,
+      admin: "Administrador",
+      edit: true,
+      image: require("../../../assets/food.png"),
+    },
+    {
+      title: "Salão de Festas",
+      subtitle: "Lazer",
+      info: `Camarim - Projetor\n\nLocal Próprio\n\nCapacidade: 50 pessoas\n\nSala de DJ\n\nMesas e Cadeiras`,
+      admin: "Administrador",
+      edit: true,
+      image: require("../../../assets/party.png"),
+    },
+    {
+      title: "Parquinho",
+      subtitle: "Lazer",
+      info: `- Gangorra\n\n- Balanços\n\n- Escorregadores\n\n- Casinhas\n\n- Trapézios`,
+      admin: "Administrador",
+      edit: true,
+      image: require("../../../assets/playground.png"),
+    },
+    {
+      title: "Quadra de Basquete",
+      subtitle: "Esporte",
+      info: `- Piso de madeira\n\n- 21 x 42 x 7 m\n\n- Rede de proteção\n\n- Bancos\n\n- Arquibancadas`,
+      admin: "Administrador",
+      edit: true,
+      image: require("../../../assets/court.png"),
+    },
+  ];
 
   const confirm = () => {
     setModal(!modal);
@@ -25,56 +75,23 @@ export default function Areas({ navigation }) {
         </Text>
       </View>
       <View style={styles.body}>
-        <ScrollView style={{ paddingHorizontal: 15 }} horizontal={true}>
-          <Area
-            title="Piscina Olímpica"
-            subtitle="Esporte"
-            info={`Comprimento: 50 metros\n\nLargura: 25 metros\n\nProfundidade: 3 metros\n\nTemperatura da água: 25°C\n\nNúmero de raias: 8`}
-            admin="Administrador"
-            edit={true}
-            image={require("../../../assets/pool.png")}
-          />
-          <Area
-            title="Churrasqueira"
-            subtitle="Lazer"
-            info={`Peso: 2,8kg\n\nAltura: 60 cm\n\nLargura: 30 cm\n\nProfundidade: 38 cm\n\nFabricante: ouro de minas.`}
-            admin="Administrador"
-            edit={true}
-            image={require("../../../assets/barbecue.png")}
-          />
-          <Area
-            title="Refeitório"
-            subtitle="Lazer"
-            info={`Capacidade: 250 pessoas\n\nTemperatura: 20°C\n\nEspaço: 596,96m2\n\nBanheiros: Masculinx e Femininx\n\nCozinha: Restrita.`}
-            admin="Administrador"
-            edit={true}
-            image={require("../../../assets/food.png")}
-          />
-          <Area
-            title="Salão de Festas"
-            subtitle="Lazer"
-            info={`Camarim - Projetor\n\nLocal Próprio\n\nCapacidade: 50 pessoas\n\nSala de DJ\n\nMesas e Cadeiras`}
-            admin="Administrador"
-            edit={true}
-            image={require("../../../assets/party.png")}
-          />
-          <Area
-            title="Parquinho"
-            subtitle="Lazer"
-            info={`- Gangorra\n\n- Balanços\n\n- Escorregadores\n\n- Casinhas\n\n- Trapézios`}
-            admin="Administrador"
-            edit={true}
-            image={require("../../../assets/playground.png")}
-          />
-          <Area
-            title="Quadra de Basquete"
-            subtitle="Esporte"
-            info={`- Piso de madeira\n\n- 21 x 42 x 7 m\n\n- Rede de proteção\n\n- Bancos\n\n- Arquibancadas`}
-            admin="Administrador"
-            edit={true}
-            image={require("../../../assets/court.png")}
-          />
-        </ScrollView>
+        <FlatList
+          style={{ paddingHorizontal: 15 }}
+          horizontal={true}
+          data={areaData}
+          renderItem={({ item }) => {
+            return (
+              <Area
+                title={item.title}
+                subtitle={item.subtitle}
+                info={item.info}
+                admin={item.admin}
+                edit={item.edit}
+                image={item.image}
+              />
+            );
+          }}
+        />
         <Modal
           animationType="fade"
           transparent={true}
