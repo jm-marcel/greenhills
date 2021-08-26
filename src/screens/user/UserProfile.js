@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {
-  Image,
-  Modal,
-  StyleSheet,
+  Image, StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -10,6 +8,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TextInputMask } from "react-native-masked-text";
+import Alert from "../../components/Alert";
 
 export default function UserProfile({ navigation }) {
   const [date, setDate] = useState("");
@@ -117,43 +116,17 @@ export default function UserProfile({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modal}
-          onRequestClose={() => {
-            setModal(!modal);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <View>
-                <Text style={styles.upperText}>Confirmar Atualização</Text>
-                <Text style={styles.modalText}>
-                  Ei! Você tem certeza de que quer atualizar seus dados?
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <View style={{ paddingRight: 10 }}>
-                  <TouchableOpacity
-                    style={styles.confirmButton}
-                    onPress={confirm}
-                  >
-                    <Text style={styles.confirmTextStyle}>Sim!</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={{ paddingLeft: 10 }}>
-                  <TouchableOpacity
-                    style={styles.denyButton}
-                    onPress={() => setModal(!modal)}
-                  >
-                    <Text style={styles.denyTextStyle}>Não!</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </View>
-        </Modal>
+        // TODO Fix Modal Validation (Currently Working Only When Double Clicking)
+        {modal === true ? (
+          <Alert
+            title="Confirmar Atualização"
+            subtitle="Ei! Você tem certeza de que quer atualizar seus dados?"
+            screen="AdminHome"
+            modal={modal}
+          />
+        ) : (
+          <View />
+        )}
       </KeyboardAwareScrollView>
     </View>
   );
