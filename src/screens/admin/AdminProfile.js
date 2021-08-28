@@ -112,7 +112,6 @@ export default function AdminProfile({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        // TODO Fix Modal Validation (Currently Working Only When Double Clicking)
         {modal === true ? (
           <Alert
             title="Confirmar Atualização"

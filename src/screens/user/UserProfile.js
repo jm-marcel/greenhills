@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
-  Image, StyleSheet,
+  Image,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -116,7 +117,6 @@ export default function UserProfile({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        // TODO Fix Modal Validation (Currently Working Only When Double Clicking)
         {modal === true ? (
           <Alert
             title="Confirmar Atualização"

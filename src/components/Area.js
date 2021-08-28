@@ -1,13 +1,41 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { withNavigation } from "react-navigation";
+import firebase from "../config/Firebase";
 
 class Area extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      areaId: this.props.id,
+      userId: "",
+      title: this.props.title,
+      subtitle: this.props.subtitle,
+      info: this.props.info,
+      admin: this.props.admin,
+      edit: this.props.edit,
+      image: this.props.image,
+    };
+  }
   render() {
+    const { currentUser } = firebase.auth();
+    let form = this.state;
+    form.userId = currentUser?.uid;
+    const database = firebase.firestore();
+
+    function addSchedule() {
+      database.collection("Schedule").doc(form.title).set(form);
+    }
+
+    function deleteSchedule() {}
+
     return this.props.edit === true ? (
       <View style={styles.area}>
         <View style={styles.image}>
-          <Image style={styles.png} source={this.props.image} />
+          <Image
+            style={styles.png}
+            source={require("../../assets/playground.png")}
+          />
         </View>
         <View style={styles.info}>
           <View style={styles.infoHeader}>
@@ -39,7 +67,10 @@ class Area extends React.Component {
     ) : (
       <View style={styles.area}>
         <View style={styles.image}>
-          <Image style={styles.png} source={this.props.image} />
+          <Image
+            style={styles.png}
+            source={require("../../assets/playground.png")}
+          />
         </View>
         <View style={styles.info}>
           <View style={styles.infoHeader}>
@@ -59,7 +90,7 @@ class Area extends React.Component {
               source={require("../../assets/admin.png")}
             />
             <Text>{this.props.admin}</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={addSchedule}>
               <Image
                 style={{ maxHeight: 30, maxWidth: 30 }}
                 source={require("../../assets/add.png")}
