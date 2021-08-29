@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -8,69 +8,35 @@ import {
   View
 } from "react-native";
 import Area from "../../components/Area";
+import firebase from "../../config/Firebase";
 
 export default function Areas({ navigation }) {
+  const database = firebase.firestore();
+
+  const [list, setList] = useState([]);
   const [modal, setModal] = useState(false);
-  const areaData = [
-    {
-      id: 1,
-      title: "Piscina Olímpica",
-      subtitle: "Esporte",
-      info: `Comprimento: 50 metros\n\nLargura: 25 metros\n\nProfundidade: 3 metros\n\nTemperatura da água: 25°C\n\nNúmero de raias: 8`,
-      admin: "Administrador",
-      edit: true,
-      image: "../../../assets/pool.png",
-    },
-    {
-      id: 2,
-      title: "Churrasqueira",
-      subtitle: "Lazer",
-      info: `Peso: 2,8kg\n\nAltura: 60 cm\n\nLargura: 30 cm\n\nProfundidade: 38 cm\n\nFabricante: ouro de minas`,
-      admin: "Administrador",
-      edit: true,
-      image: "../../../assets/barbecue.png",
-    },
-    {
-      id: 3,
-      title: "Refeitório",
-      subtitle: "Alimentação",
-      info: `Capacidade: 250 pessoas\n\nTemperatura: 20°C\n\nEspaço: 596,96m2\n\nBanheiros: Masculinx e Femininx\n\nCozinha: Restrita`,
-      admin: "Administrador",
-      edit: true,
-      image: "../../../assets/food.png",
-    },
-    {
-      id: 4,
-      title: "Salão de Festas",
-      subtitle: "Lazer",
-      info: `Camarim - Projetor\n\nLocal Próprio\n\nCapacidade: 50 pessoas\n\nSala de DJ\n\nMesas e Cadeiras`,
-      admin: "Administrador",
-      edit: true,
-      image: "../../../assets/party.png",
-    },
-    {
-      id: 5,
-      title: "Parquinho",
-      subtitle: "Lazer",
-      info: `- Gangorra\n\n- Balanços\n\n- Escorregadores\n\n- Casinhas\n\n- Trapézios`,
-      admin: "Administrador",
-      edit: true,
-      image: "../../../assets/playground.png",
-    },
-    {
-      id: 6,
-      title: "Quadra de Basquete",
-      subtitle: "Esporte",
-      info: `- Piso de madeira\n\n- 21 x 42 x 7 m\n\n- Rede de proteção\n\n- Bancos\n\n- Arquibancadas`,
-      admin: "Administrador",
-      edit: true,
-      image: "../../../assets/court.png",
-    },
-  ];
 
   const confirm = () => {
     setModal(!modal);
   };
+
+  const getAreas = () => {
+    database
+      .collection("Area")
+      .get()
+      .then((querySnapshot) => {
+        const areas = [];
+        querySnapshot.forEach((doc) => {
+          areas.push(doc.data());
+        });
+        setList(areas);
+      });
+    return list;
+  };
+
+  useEffect(() => {
+    getAreas();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -84,7 +50,7 @@ export default function Areas({ navigation }) {
         <FlatList
           style={{ paddingHorizontal: 15 }}
           horizontal={true}
-          data={areaData}
+          data={list}
           renderItem={({ item }) => {
             return (
               <Area

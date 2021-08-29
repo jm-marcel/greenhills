@@ -17,25 +17,40 @@ class Area extends React.Component {
       image: this.props.image,
     };
   }
+
   render() {
+    const database = firebase.firestore();
+
     const { currentUser } = firebase.auth();
+
     let form = this.state;
     form.userId = currentUser?.uid;
-    const database = firebase.firestore();
+
+    function findSrcImg(image) {
+      switch (image) {
+        case "pool":
+          return require("../../assets/pool.png");
+        case "barbecue":
+          return require("../../assets/barbecue.png");
+        case "food":
+          return require("../../assets/food.png");
+        case "party":
+          return require("../../assets/party.png");
+        case "playground":
+          return require("../../assets/playground.png");
+        case "court":
+          return require("../../assets/court.png");
+      }
+    }
 
     function addSchedule() {
       database.collection("Schedule").doc(form.title).set(form);
     }
 
-    function deleteSchedule() {}
-
     return this.props.edit === true ? (
       <View style={styles.area}>
         <View style={styles.image}>
-          <Image
-            style={styles.png}
-            source={require("../../assets/playground.png")}
-          />
+          <Image style={styles.png} source={findSrcImg(this.props.image)} />
         </View>
         <View style={styles.info}>
           <View style={styles.infoHeader}>
@@ -67,10 +82,7 @@ class Area extends React.Component {
     ) : (
       <View style={styles.area}>
         <View style={styles.image}>
-          <Image
-            style={styles.png}
-            source={require("../../assets/playground.png")}
-          />
+          <Image style={styles.png} source={findSrcImg(this.props.image)} />
         </View>
         <View style={styles.info}>
           <View style={styles.infoHeader}>

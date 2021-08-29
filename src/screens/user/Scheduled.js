@@ -18,6 +18,10 @@ export default function Scheduled({ navigation }) {
   const [list, setList] = useState([]);
   const [modal, setModal] = useState(false);
 
+  const confirm = () => {
+    setModal(!modal);
+  };
+
   const getSchedules = () => {
     database
       .collection("Schedule")
@@ -36,10 +40,6 @@ export default function Scheduled({ navigation }) {
   useEffect(() => {
     getSchedules();
   }, []);
-
-  const confirm = () => {
-    setModal(!modal);
-  };
 
   return (
     <View style={styles.container}>
@@ -60,7 +60,7 @@ export default function Scheduled({ navigation }) {
                 subtitle={item.subtitle}
                 info={item.info}
                 admin={item.admin}
-                edit={item.edit}
+                edit={!item.edit}
                 image={item.image}
               />
             );

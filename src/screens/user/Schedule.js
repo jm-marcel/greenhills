@@ -12,7 +12,7 @@ export default function Schedule({ navigation }) {
       info: `Comprimento: 50 metros\n\nLargura: 25 metros\n\nProfundidade: 3 metros\n\nTemperatura da água: 25°C\n\nNúmero de raias: 8`,
       admin: "Administrador",
       edit: false,
-      image: "../../../assets/pool.png",
+      image: "pool",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ export default function Schedule({ navigation }) {
       info: `Peso: 2,8kg\n\nAltura: 60 cm\n\nLargura: 30 cm\n\nProfundidade: 38 cm\n\nFabricante: ouro de minas`,
       admin: "Administrador",
       edit: false,
-      image: "../../../assets/barbecue.png",
+      image: "barbecue",
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ export default function Schedule({ navigation }) {
       info: `Capacidade: 250 pessoas\n\nTemperatura: 20°C\n\nEspaço: 596,96m2\n\nBanheiros: Masculinx e Femininx\n\nCozinha: Restrita`,
       admin: "Administrador",
       edit: false,
-      image: "../../../assets/food.png",
+      image: "food",
     },
     {
       id: 4,
@@ -39,7 +39,7 @@ export default function Schedule({ navigation }) {
       info: `Camarim - Projetor\n\nLocal Próprio\n\nCapacidade: 50 pessoas\n\nSala de DJ\n\nMesas e Cadeiras`,
       admin: "Administrador",
       edit: false,
-      image: "../../../assets/party.png",
+      image: "party",
     },
     {
       id: 5,
@@ -48,7 +48,7 @@ export default function Schedule({ navigation }) {
       info: `- Gangorra\n\n- Balanços\n\n- Escorregadores\n\n- Casinhas\n\n- Trapézios`,
       admin: "Administrador",
       edit: false,
-      image: "../../../assets/playground.png",
+      image: "playground",
     },
     {
       id: 6,
@@ -57,7 +57,7 @@ export default function Schedule({ navigation }) {
       info: `- Piso de madeira\n\n- 21 x 42 x 7 m\n\n- Rede de proteção\n\n- Bancos\n\n- Arquibancadas`,
       admin: "Administrador",
       edit: false,
-      image: "../../../assets/court.png",
+      image: "court",
     },
   ];
 
