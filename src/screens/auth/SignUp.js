@@ -32,18 +32,19 @@ export default function SignUp({ navigation }) {
         .createUserWithEmailAndPassword(email, password)
         .then((data) => {
           let user = data.user;
+          database.collection("User").doc(name).set({
+            uid: user.uid,
+            name: name,
+            phone: phone,
+            admin: administratorOn,
+            email: email,
+            password: password,
+          });
           navigation.navigate("Registered", { userId: user.uid });
         })
         .catch((error) => {
           setError(true);
         });
-      database.collection("User").doc(name).set({
-        name: name,
-        phone: phone,
-        admin: administratorOn,
-        email: email,
-        password: password,
-      });
     }
   };
 

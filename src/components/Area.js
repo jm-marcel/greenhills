@@ -47,6 +47,10 @@ class Area extends React.Component {
       database.collection("Schedule").doc(form.title).set(form);
     }
 
+    function deleteSchedule() {
+      database.collection("Schedule").doc(form.title).delete();
+    }
+
     return this.props.edit === true ? (
       <View style={styles.area}>
         <View style={styles.image}>
@@ -70,7 +74,7 @@ class Area extends React.Component {
               source={require("../../assets/admin.png")}
             />
             <Text>{this.props.admin}</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={deleteSchedule}>
               <Image
                 style={{ maxHeight: 30, maxWidth: 30 }}
                 source={require("../../assets/dumpster.png")}

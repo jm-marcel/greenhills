@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   FlatList,
+  Image,
   Modal,
   StyleSheet,
   Text,
@@ -47,63 +48,79 @@ export default function Scheduled({ navigation }) {
         <Text style={styles.title}>Minhas Reservas</Text>
         <Text style={styles.subtitle}>Visualize e exclua suas reservas!</Text>
       </View>
-      <View style={styles.body}>
-        <FlatList
-          style={{ paddingHorizontal: 15 }}
-          horizontal={true}
-          data={list}
-          renderItem={({ item }) => {
-            return (
-              <Area
-                id={item.areaId}
-                title={item.title}
-                subtitle={item.subtitle}
-                info={item.info}
-                admin={item.admin}
-                edit={!item.edit}
-                image={item.image}
-              />
-            );
-          }}
-        />
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modal}
-          onRequestClose={() => {
-            setModal(!modal);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <View>
-                <Text style={styles.upperText}>Confirmar Exclusão</Text>
-                <Text style={styles.modalText}>
-                  Ei! Você realmente deseja excluir a reserva selecionada?
-                </Text>
+      {list.length > 0 ? (
+        <View style={styles.body}>
+          <FlatList
+            style={{ paddingHorizontal: 15 }}
+            horizontal={true}
+            data={list}
+            renderItem={({ item }) => {
+              return (
+                <Area
+                  id={item.areaId}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  info={item.info}
+                  admin={item.admin}
+                  edit={!item.edit}
+                  image={item.image}
+                />
+              );
+            }}
+          />
+        </View>
+      ) : (
+        <View style={styles.body}>
+          <View style={styles.row}>
+            <Image
+              source={require("../../../assets/noSchedules.png")}
+              style={styles.image}
+            />
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.text}>
+              Você ainda não fez nenhuma reserva! ;-;
+            </Text>
+          </View>
+        </View>
+      )}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modal}
+        onRequestClose={() => {
+          setModal(!modal);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View>
+              <Text style={styles.upperText}>Confirmar Exclusão</Text>
+              <Text style={styles.modalText}>
+                Ei! Você realmente deseja excluir a reserva selecionada?
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ paddingRight: 10 }}>
+                <TouchableOpacity
+                  style={styles.confirmButton}
+                  onPress={confirm}
+                >
+                  <Text style={styles.confirmTextStyle}>Sim!</Text>
+                </TouchableOpacity>
               </View>
-              <View style={{ flexDirection: "row" }}>
-                <View style={{ paddingRight: 10 }}>
-                  <TouchableOpacity
-                    style={styles.confirmButton}
-                    onPress={confirm}
-                  >
-                    <Text style={styles.confirmTextStyle}>Sim!</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={{ paddingLeft: 10 }}>
-                  <TouchableOpacity
-                    style={styles.denyButton}
-                    onPress={() => setModal(!modal)}
-                  >
-                    <Text style={styles.denyTextStyle}>Não!</Text>
-                  </TouchableOpacity>
-                </View>
+              <View style={{ paddingLeft: 10 }}>
+                <TouchableOpacity
+                  style={styles.denyButton}
+                  onPress={() => setModal(!modal)}
+                >
+                  <Text style={styles.denyTextStyle}>Não!</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -136,6 +153,21 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "#656F77",
     paddingTop: 10,
+  },
+  image: {
+    maxHeight: 200,
+    maxWidth: 200,
+  },
+  text: {
+    color: "#fff",
+    fontSize: 15,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 20,
+    paddingBottom: 50,
   },
   centeredView: {
     flex: 1,

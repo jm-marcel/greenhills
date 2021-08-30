@@ -121,7 +121,7 @@ export default function UserProfile({ navigation }) {
           <Alert
             title="Confirmar Atualização"
             subtitle="Ei! Você tem certeza de que quer atualizar seus dados?"
-            screen="AdminHome"
+            screen="UserHome"
             modal={modal}
           />
         ) : (
